@@ -1,0 +1,12 @@
+name = "signova-qr"
+pages_build_output_dir = "dist"
+compatibility_date = "2024-03-20"
+
+[[d1_databases]]
+binding = "DB"
+database_name = "signova-db"
+database_id = "61521b5e-a78c-4ff9-b988-4f3bf961693d"
+
+[[r2_buckets]]
+binding = "STORAGE"
+bucket_name = "signova-products"

@@ -1,0 +1,55 @@
+:root {
+  --radius: 0.875rem;
+
+  --deep: oklch(0.32 0.09 145);
+  --leaf: oklch(0.55 0.15 142);
+  --lime: oklch(0.82 0.21 128);
+  --earth: oklch(0.78 0.06 75);
+  --charcoal: oklch(0.18 0.015 160);
+
+  --background: oklch(0.99 0.005 120);
+  --foreground: oklch(0.18 0.015 160);
+  --card: oklch(1 0 0);
+  --card-foreground: oklch(0.18 0.015 160);
+  --popover: oklch(1 0 0);
+  --popover-foreground: oklch(0.18 0.015 160);
+  --primary: oklch(0.25 0.07 142);
+  --primary-foreground: oklch(0.98 0.02 120);
+  --secondary: oklch(0.95 0.03 130);
+  --secondary-foreground: oklch(0.25 0.05 145);
+  --muted: oklch(0.96 0.012 130);
+  --muted-foreground: oklch(0.48 0.02 145);
+  --accent: oklch(0.82 0.21 128);
+  --accent-foreground: oklch(0.18 0.015 160);
+  --destructive: oklch(0.58 0.22 27);
+  --destructive-foreground: oklch(0.98 0 0);
+  --border: oklch(0.9 0.015 130);
+  --input: oklch(0.92 0.015 130);
+  --ring: oklch(0.55 0.15 142);
+
+  --gradient-hero: linear-gradient(135deg, oklch(0.32 0.09 145) 0%, oklch(0.18 0.05 155) 60%, oklch(0.12 0.02 160) 100%);
+  --gradient-lime: linear-gradient(135deg, oklch(0.82 0.21 128), oklch(0.55 0.15 142));
+  --gradient-glow: radial-gradient(circle at 30% 20%, oklch(0.82 0.21 128 / 0.35), transparent 60%);
+  --shadow-glow: 0 20px 60px -20px oklch(0.55 0.15 142 / 0.45);
+  --shadow-card: 0 10px 40px -15px oklch(0.32 0.09 145 / 0.18);
+}
+
+.dark {
+  --background: oklch(0.12 0.02 160);
+  --foreground: oklch(0.98 0.02 120);
+  --card: oklch(0.17 0.025 155);
+  --card-foreground: oklch(0.98 0.02 120);
+  --popover: oklch(0.17 0.025 155);
+  --popover-foreground: oklch(0.98 0.02 120);
+  --primary: oklch(0.82 0.21 128);
+  --primary-foreground: oklch(0.18 0.015 160);
+  --secondary: oklch(0.22 0.03 150);
+  --secondary-foreground: oklch(0.95 0.02 120);
+  --muted: oklch(0.2 0.02 150);
+  --muted-foreground: oklch(0.7 0.02 145);
+  --accent: oklch(0.82 0.21 128);
+  --accent-foreground: oklch(0.18 0.015 160);
+  --border: oklch(1 0 0 / 10%);
+  --input: oklch(1 0 0 / 12%);
+  --ring: oklch(0.82 0.21 128);
+}
