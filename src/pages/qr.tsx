@@ -7,7 +7,7 @@ import { fetchProducts, fetchProductCategories, getIcon, getProductImageUrl, Pro
 import { QRCodeSVG } from "qrcode.react";
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription } from "@/components/ui/dialog";
 
-const itemsPerPage = 24;
+const itemsPerPage = 20;
 
 function Header({ onRefresh }: { onRefresh?: () => void }) {
   const [refreshing, setRefreshing] = useState(false);
