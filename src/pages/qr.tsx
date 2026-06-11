@@ -307,9 +307,16 @@ function ProductCard({
           </div>
         )}
 
-        <h3 className="text-[13px] font-bold leading-snug text-center text-foreground/90 line-clamp-2 mb-3.5 px-0.5 font-display">
-          {product.name}
-        </h3>
+        <div className="mb-3.5 px-0.5 flex flex-col items-center">
+          <h3 className="text-[13px] font-bold leading-snug text-center text-foreground/90 line-clamp-2 font-display">
+            {product.name}
+          </h3>
+          {product.subtitle && product.subtitle.trim() !== "" && (
+            <span className="text-[10px] text-muted-foreground font-medium mt-0.5 text-center line-clamp-1">
+              {product.subtitle}
+            </span>
+          )}
+        </div>
 
         <button
           onClick={() => onDownload(product)}
@@ -356,6 +363,11 @@ function ListProductCard({
           <h3 className="text-[14px] font-bold leading-snug text-foreground/90 truncate font-display">
             {product.name}
           </h3>
+          {product.subtitle && product.subtitle.trim() !== "" && (
+            <span className="text-[11px] text-muted-foreground font-medium block truncate mt-0.5">
+              {product.subtitle}
+            </span>
+          )}
         </div>
 
         <button
