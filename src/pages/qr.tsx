@@ -182,36 +182,95 @@ function CategoryPills({
   activeCategory: string;
   onSelect: (slug: string) => void;
 }) {
+  const scrollContainerRef = useRef<HTMLDivElement>(null);
+  const [showLeftArrow, setShowLeftArrow] = useState(false);
+  const [showRightArrow, setShowRightArrow] = useState(true);
+
+  const checkScroll = () => {
+    if (scrollContainerRef.current) {
+      const { scrollLeft, scrollWidth, clientWidth } = scrollContainerRef.current;
+      setShowLeftArrow(scrollLeft > 0);
+      setShowRightArrow(Math.ceil(scrollLeft + clientWidth) < scrollWidth);
+    }
+  };
+
+  useEffect(() => {
+    // Slight delay to ensure layout is complete before checking
+    const timer = setTimeout(checkScroll, 100);
+    window.addEventListener("resize", checkScroll);
+    return () => {
+      clearTimeout(timer);
+      window.removeEventListener("resize", checkScroll);
+    };
+  }, [categories]);
+
+  const scroll = (direction: "left" | "right") => {
+    if (scrollContainerRef.current) {
+      const scrollAmount = 200;
+      scrollContainerRef.current.scrollBy({
+        left: direction === "left" ? -scrollAmount : scrollAmount,
+        behavior: "smooth"
+      });
+      setTimeout(checkScroll, 350);
+    }
+  };
+
   return (
-    <div className="w-full overflow-x-auto no-scrollbar py-1 flex items-center gap-2.5 -mx-4 px-4 md:hidden">
-      <button
-        onClick={() => onSelect("all")}
-        className={`shrink-0 flex items-center gap-1.5 px-4 py-2.5 rounded-full text-xs font-bold transition-all duration-200 ${
-          activeCategory === "all"
-            ? "bg-primary text-primary-foreground shadow-sm shadow-primary/20 scale-105"
-            : "bg-secondary text-foreground/75 active:bg-secondary/90"
-        }`}
+    <div className="relative w-full md:hidden -mx-4 px-4 overflow-hidden">
+      {showLeftArrow && <div className="absolute top-0 bottom-0 left-4 w-8 bg-gradient-to-r from-background to-transparent pointer-events-none z-10" />}
+      {showRightArrow && <div className="absolute top-0 bottom-0 right-4 w-8 bg-gradient-to-l from-background to-transparent pointer-events-none z-10" />}
+      
+      {showLeftArrow && (
+        <button
+          onClick={() => scroll("left")}
+          className="absolute left-5 top-1/2 -translate-y-1/2 z-20 size-7 rounded-full bg-background/90 backdrop-blur border border-border shadow-md flex items-center justify-center text-muted-foreground hover:text-foreground hover:border-primary/50 transition-colors"
+        >
+          <ChevronLeft className="size-4" />
+        </button>
+      )}
+      {showRightArrow && (
+        <button
+          onClick={() => scroll("right")}
+          className="absolute right-5 top-1/2 -translate-y-1/2 z-20 size-7 rounded-full bg-background/90 backdrop-blur border border-border shadow-md flex items-center justify-center text-muted-foreground hover:text-foreground hover:border-primary/50 transition-colors"
+        >
+          <ChevronRight className="size-4" />
+        </button>
+      )}
+
+      <div 
+        ref={scrollContainerRef}
+        onScroll={checkScroll}
+        className="w-full overflow-x-auto no-scrollbar py-1 flex items-center gap-2.5"
       >
-        <PackageSearch className="size-3.5" strokeWidth={2.5} />
-        <span>All</span>
-      </button>
-      {categories.filter(c => c.slug !== "all").map((cat) => {
-        const Icon = getIcon(cat.icon);
-        return (
-          <button
-            key={cat.id}
-            onClick={() => onSelect(cat.slug)}
-            className={`shrink-0 flex items-center gap-1.5 px-4 py-2.5 rounded-full text-xs font-bold transition-all duration-200 ${
-              activeCategory === cat.slug
-                ? "bg-primary text-primary-foreground shadow-sm shadow-primary/20 scale-105"
-                : "bg-secondary text-foreground/75 active:bg-secondary/90"
-            }`}
-          >
-            <Icon className="size-3.5" strokeWidth={2.5} />
-            <span>{cat.name}</span>
-          </button>
-        );
-      })}
+        <button
+          onClick={() => onSelect("all")}
+          className={`shrink-0 flex items-center gap-1.5 px-4 py-2.5 rounded-full text-xs font-bold transition-all duration-200 ${
+            activeCategory === "all"
+              ? "bg-primary text-primary-foreground shadow-sm shadow-primary/20 scale-105"
+              : "bg-secondary text-foreground/75 active:bg-secondary/90"
+          }`}
+        >
+          <PackageSearch className="size-3.5" strokeWidth={2.5} />
+          <span>All</span>
+        </button>
+        {categories.filter(c => c.slug !== "all").map((cat) => {
+          const Icon = getIcon(cat.icon);
+          return (
+            <button
+              key={cat.id}
+              onClick={() => onSelect(cat.slug)}
+              className={`shrink-0 flex items-center gap-1.5 px-4 py-2.5 rounded-full text-xs font-bold transition-all duration-200 ${
+                activeCategory === cat.slug
+                  ? "bg-primary text-primary-foreground shadow-sm shadow-primary/20 scale-105"
+                  : "bg-secondary text-foreground/75 active:bg-secondary/90"
+              }`}
+            >
+              <Icon className="size-3.5" strokeWidth={2.5} />
+              <span>{cat.name}</span>
+            </button>
+          );
+        })}
+      </div>
     </div>
   );
 }
