@@ -20,7 +20,7 @@ function Header({ onRefresh }: { onRefresh?: () => void }) {
   return (
     <div className="sticky top-0 z-40 bg-hero border-b border-white/5 w-full">
       <div className="absolute inset-0 bg-gradient-to-b from-black/10 to-transparent pointer-events-none" />
-      <div className="flex items-center justify-between px-5 h-16 relative w-full">
+      <div className="flex items-center justify-between px-5 max-[250px]:px-2 h-16 relative w-full">
         <div className="flex items-center gap-3.5">
           <div className="size-9 rounded-2xl bg-white/15 backdrop-blur-md flex items-center justify-center shadow-lg shadow-black/10 border border-white/10">
             <QrCode className="size-4.5 text-white" strokeWidth={2.5} />
@@ -783,8 +783,8 @@ export default function ProductsQrPage() {
         </div>
 
         {/* Controls: Search & Category Filter (mobile only) & View Modes */}
-        <div className="sticky top-0 md:relative z-30 bg-background/90 backdrop-blur-xl md:backdrop-blur-none py-3 px-4 md:px-0 flex flex-col gap-3 md:mb-6">
-          <div className="flex items-center gap-3">
+        <div className="sticky top-0 md:relative z-30 bg-background/90 backdrop-blur-xl md:backdrop-blur-none py-3 px-4 max-[250px]:px-2 md:px-0 flex flex-col gap-3 max-[250px]:gap-2 md:mb-6">
+          <div className="flex items-center gap-3 max-[250px]:gap-2">
             {/* Search Bar */}
             <div className="relative flex-1 md:max-w-md">
               <Search className="absolute left-4 top-1/2 -translate-y-1/2 size-4 text-muted-foreground/60" strokeWidth={2} />
@@ -835,7 +835,7 @@ export default function ProductsQrPage() {
         <div className="flex-1 px-4 md:px-0 pb-6">
           {isLoading ? (
             viewMode === "grid" ? (
-              <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5 gap-3 md:gap-4">
+              <div className="grid max-[250px]:grid-cols-1 grid-cols-2 sm:grid-cols-3 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5 gap-3 md:gap-4">
                 {Array.from({ length: 8 }).map((_, i) => (
                   <div key={i} className="bg-card rounded-2xl border border-border/50 overflow-hidden p-3">
                     <div className="aspect-square rounded-xl bg-gradient-to-br from-secondary/60 to-secondary/30 mb-3 shimmer" />
@@ -860,7 +860,7 @@ export default function ProductsQrPage() {
           ) : (
             <>
               {viewMode === "grid" ? (
-                <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5 gap-3 md:gap-4">
+                <div className="grid max-[250px]:grid-cols-1 grid-cols-2 sm:grid-cols-3 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5 gap-3 md:gap-4">
                   <AnimatePresence mode="popLayout">
                     {paginatedProducts.map((product, index) => (
                       <ProductCard
