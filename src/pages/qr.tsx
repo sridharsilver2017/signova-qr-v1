@@ -216,7 +216,7 @@ function CategoryPills({
   };
 
   return (
-    <div className="relative w-full md:hidden -mx-4 px-4 overflow-hidden">
+    <div className="relative w-[calc(100%+2rem)] md:w-full md:hidden -mx-4 px-4 overflow-hidden">
       {showLeftArrow && <div className="absolute top-0 bottom-0 left-4 w-8 bg-gradient-to-r from-background to-transparent pointer-events-none z-10" />}
       {showRightArrow && <div className="absolute top-0 bottom-0 right-4 w-8 bg-gradient-to-l from-background to-transparent pointer-events-none z-10" />}
       
