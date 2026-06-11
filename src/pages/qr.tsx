@@ -618,7 +618,8 @@ export default function ProductsQrPage() {
         fetch(`${apiBase}/api/settings`).then(r => r.json()).catch(() => ({})),
       ]);
       if (settingsRes.base_url) setBaseUrl(settingsRes.base_url);
-      setProductsList(products);
+      const sortedProducts = products.sort((a, b) => a.name.localeCompare(b.name));
+      setProductsList(sortedProducts);
       setProductCategories(categories);
     } catch (err) {
       console.error("Failed to load data:", err);
